@@ -1,22 +1,60 @@
-def isCorrectRect(rect):
-    left_down = rect[0]
-    right_up = rect[1]
-    if left_down[0] < right_up[0] and left_down[1]<right_up[1]:
-        return True
-    else:
-        return False
-rect = []
-try:
+class RectCorrectError(Exception):
+    pass
+def isCorrectRect(rect1,rect2):
     
+    x1_left, y1_down = rect1[0]
+    x1_right, y1_up = rect1[1]
+    
+    
+    if x1_left< x1_right and y1_down<y1_up:
+        pass
+    else:
+        raise RectCorrectError("1 прямоугольник не существует")
+ 
+    x2_left, y2_down = rect2[0]
+    x2_right, y2_up = rect2[1]
+    if x2_left< x2_right and y2_down<y2_up:
+        pass
+    else:
+        raise RectCorrectError("2 прямоугольник не существует")
+    
+    if (x1_right < x2_left or  
+        x2_right < x1_left or 
+        y1_up < y2_down or  
+        y2_up < y1_down):  
+        return False
+    
+   
+    return True
+rect_1 = []
+rect_2 = []
+
+try:
+    print("Коордианты первого прямоугольника")
     left_down_x = float(input("Введите x левого нижнего угла"))
     left_down_y = float(input("Введите y левого нижнего угла"))
-    rect.append((left_down_x, left_down_y ))
+    rect_1.append((left_down_x, left_down_y ))
     right_up_x = float(input("Введите x правого верхнего угла"))
     right_up_y = float(input("Введите y правого верхнего угла"))
-    rect.append((right_up_x, right_up_y ))
-    if isCorrectRect(rect):
-        print("Такой прямоугольник существует")
+    rect_1.append((right_up_x, right_up_y ))
+
+    
+    print("Коордианты второго прямоугольника")
+    left_down_x = float(input("Введите x левого нижнего угла"))
+    left_down_y = float(input("Введите y левого нижнего угла"))
+    rect_2.append((left_down_x, left_down_y ))
+    right_up_x = float(input("Введите x правого верхнего угла"))
+    right_up_y = float(input("Введите y правого верхнего угла"))
+    rect_2.append((right_up_x, right_up_y ))
+    
+    
+    if isCorrectRect(rect_1, rect_2):
+        print("Прямоугольники пересекаются")
     else:
-        print("Такого прямоугольника не существует")
+        print("Прямоугольники не пересекаются")
 except ValueError:
     print("Вводить можно только числа")
+except RectCorrectError as e:
+    print(e)
+    
+    
