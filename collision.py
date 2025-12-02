@@ -1,4 +1,4 @@
-class RectCorrectError(Exception):
+class ValueError (Exception):
     pass
 def isCorrectRect(rect1,rect2):
     
@@ -9,23 +9,24 @@ def isCorrectRect(rect1,rect2):
     if x1_left< x1_right and y1_down<y1_up:
         pass
     else:
-        raise RectCorrectError("1 прямоугольник не существует")
+        raise ValueError ("1 прямоугольник не существует")
  
     x2_left, y2_down = rect2[0]
     x2_right, y2_up = rect2[1]
     if x2_left< x2_right and y2_down<y2_up:
         pass
     else:
-        raise RectCorrectError("2 прямоугольник не существует")
+        raise ValueError ("2 прямоугольник не существует")
     
     if (x1_right < x2_left or  
         x2_right < x1_left or 
         y1_up < y2_down or  
         y2_up < y1_down):  
-        return False
+        return 0
     
    
-    return True
+    else:
+        
 rect_1 = []
 rect_2 = []
 
@@ -54,7 +55,7 @@ try:
         print("Прямоугольники не пересекаются")
 except ValueError:
     print("Вводить можно только числа")
-except RectCorrectError as e:
+except ValueError as e:
     print(e)
     
     
